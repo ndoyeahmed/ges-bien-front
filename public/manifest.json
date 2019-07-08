@@ -1,0 +1,15 @@
+{
+  "short_name": "Sen-Bien",
+  "name": "Sen-Bien-Immobilier",
+  "icons": [
+    {
+      "src": "./assets/img/Logo.png",
+      "sizes": "100x100",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
