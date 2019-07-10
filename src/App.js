@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
-// import { renderRoutes } from 'react-router-config';
+import React, {Component} from 'react';
+import {HashRouter, Route, Switch} from 'react-router-dom';
 import './App.scss';
-import LoginPage from "./Components/Login/login.page";
+import LoginPage from "./Components/Login/LoginPage";
 import {ProtectedRoute} from "./protected.route";
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;

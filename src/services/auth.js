@@ -1,11 +1,12 @@
 class Auth {
     constructor() {
         this.BaseUrl = 'http://localhost:8080/senebiensimmobilier-1.0-SNAPSHOT/rest';
+      this.BaseUrlprod = 'http://localhost:8080/senebiensimmobilier-1.0-SNAPSHOT/rest';
     }
 
     login(userData) {
         return new Promise((resolve, reject) => {
-            fetch(this.BaseUrl + '/user/login', {
+          fetch(this.BaseUrlprod + '/user/login', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',

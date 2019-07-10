@@ -1,7 +1,6 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
-import UtilisateurListPage from "./utilisateur.liste.page";
-import UtilisateurAddPage from "./utilisateur.add.page";
+import UtilisateurListPage from "./UtilisateurListePage";
+import UtilisateurAddPage from "./UtilisateurAddPage";
 import Modal from "reactstrap/es/Modal";
 import ModalHeader from "reactstrap/es/ModalHeader";
 import ModalBody from "reactstrap/es/ModalBody";
@@ -12,7 +11,6 @@ import CardHeader from "reactstrap/es/CardHeader";
 import CardFooter from "reactstrap/es/CardFooter";
 import Col from "reactstrap/es/Col";
 import Row from "reactstrap/es/Row";
-import Tables from "../../views/Base/Tables";
 
 export default class UtilisateurPage extends React.Component {
 

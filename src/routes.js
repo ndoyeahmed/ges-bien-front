@@ -55,7 +55,7 @@ const routes = [
   {
     path: '/user',
     name: 'Utilisateur',
-    component: dynamicWrapper(() => import ('./Components/Utilisateur/utilisateur.page'))
+    component: dynamicWrapper(() => import ('./Components/Utilisateur/UtilisateurPage'))
   }
 
 ];

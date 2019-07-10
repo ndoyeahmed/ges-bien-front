@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
@@ -11,7 +11,7 @@ class DefaultFooter extends Component {
   render() {
 
     // eslint-disable-next-line
-    const { children, ...attributes } = this.props;
+    // const { children, ...attributes } = this.props;
 
     return (
       <React.Fragment>
