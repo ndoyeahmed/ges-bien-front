@@ -1,7 +1,7 @@
 class Auth {
     constructor() {
         this.BaseUrl = 'http://localhost:8080/senebiensimmobilier-1.0-SNAPSHOT/rest';
-      this.BaseUrlprod = 'http://localhost:8080/senebiensimmobilier-1.0-SNAPSHOT/rest';
+      this.BaseUrlprod = 'https://sene-bien-immo-api.herokuapp.com/rest';
     }
 
     login(userData) {
