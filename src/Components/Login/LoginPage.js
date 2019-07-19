@@ -31,10 +31,10 @@ class LoginPage extends React.Component {
         if (this.state.login && this.state.password) {
             auth.login(this.state).then((result) => {
                 let responseJSON = result;
-                // console.log(responseJSON);
-                if (responseJSON.success) {
+                console.log(responseJSON);
+                if (responseJSON.data.success) {
                     // console.log("welcome");
-                    sessionStorage.setItem('userData', JSON.stringify(responseJSON.success));
+                    sessionStorage.setItem('userData', JSON.stringify(responseJSON.data.success));
                     this.setState({redirectToRefferer: true});
 
                 } else {

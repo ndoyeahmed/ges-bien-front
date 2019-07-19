@@ -5,7 +5,7 @@ import FormGroup from "reactstrap/es/FormGroup";
 import Label from "reactstrap/es/Label";
 import Row from "reactstrap/es/Row";
 import Col from "reactstrap/es/Col";
-import userService from '../../services/utilisateur.service';
+import userService from '../../services/utilisateurService';
 
 export default class UtilisateurAddPage extends React.Component {
   constructor() {
@@ -30,14 +30,10 @@ export default class UtilisateurAddPage extends React.Component {
     this.getProfil = this.getProfil.bind(this);
   }
 
-  async componentDidMount() {
-    const url = "http://localhost:8080/senebiensimmobilier-1.0-SNAPSHOT/rest/profil/all-activated";
-    const response = await fetch(url, {method: "GET"});
-    const data = await response.json();
-    console.log(data);
-    this.setState({
-      listProfil: data
-    });
+   componentDidMount() {
+    userService.listProfil().then((result) => {
+      this.setState({listProfil: result.data});
+    })
   }
 
   getNom(event) { this.setState({nom: event.target.value}); }
@@ -61,18 +57,30 @@ export default class UtilisateurAddPage extends React.Component {
           id: this.state.profil
         }
       };
-      userService.addUser(user);
-      this.setState({
-        nom: '',
-        prenom: '',
-        email: '',
-        telephone: '',
-        adresse: '',
-        profil: '',
-      })
+      userService.addUser(user).then(result => {
+        if (result.data.success) {
+          console.log(result);
+          console.log('notification a mettre');
+          this.clear();
+          userService.listUser().then((x) => this.props.listUser = x.data)
+        } else {
+          console.log('erreur lors de l\'ajout');
+        }
+      });
     } else {
       this.setState({ error: 'Veuillez renseigner tous les champs SVP'})
     }
+  }
+
+  clear() {
+    this.setState({
+      nom: '',
+      prenom: '',
+      email: '',
+      telephone: '',
+      adresse: '',
+      profil: '',
+    })
   }
 
   render() {

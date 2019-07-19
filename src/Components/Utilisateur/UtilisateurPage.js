@@ -1,5 +1,5 @@
 import React from 'react';
-import UtilisateurListPage from "./UtilisateurListePage";
+import UtilisateurListPage from "./UtilisateurListPage";
 import UtilisateurAddPage from "./UtilisateurAddPage";
 import Modal from "reactstrap/es/Modal";
 import ModalHeader from "reactstrap/es/ModalHeader";
@@ -11,16 +11,29 @@ import CardHeader from "reactstrap/es/CardHeader";
 import CardFooter from "reactstrap/es/CardFooter";
 import Col from "reactstrap/es/Col";
 import Row from "reactstrap/es/Row";
+import userService from '../../services/utilisateurService';
 
 export default class UtilisateurPage extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
+      ok: false,
+      listUser: []
     };
 
     this.toggle = this.toggle.bind(this);
+  }
+
+  componentDidMount() {
+    userService.listUser().then((result) => {
+      console.log(result);
+      this.setState({
+        listUser: result.data,
+        ok: true
+      });
+    });
   }
 
   toggle() {
@@ -47,7 +60,7 @@ export default class UtilisateurPage extends React.Component {
             </Row>
           </CardHeader>
           <CardBody>
-            <UtilisateurListPage/>
+            <UtilisateurListPage listUser={this.state.listUser} ok={this.state.ok}/>
           </CardBody>
           <CardFooter>
 
@@ -56,7 +69,7 @@ export default class UtilisateurPage extends React.Component {
         <Modal className="modal-lg" isOpen={this.state.modal}>
           <ModalHeader toggle={this.toggle} className="text-center">Ajouter utilisateur</ModalHeader>
           <ModalBody>
-            <UtilisateurAddPage/>
+            <UtilisateurAddPage listUser={this.state.listUser}/>
           </ModalBody>
         </Modal>
       </div>

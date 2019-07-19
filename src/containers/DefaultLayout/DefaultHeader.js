@@ -18,6 +18,7 @@ const defaultProps = {};
 
 class DefaultHeader extends Component {
   render() {
+    console.log(sessionStorage.getItem('userData'));
     const userData = JSON.parse(sessionStorage.getItem('userData'));
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
