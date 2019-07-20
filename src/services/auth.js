@@ -4,11 +4,17 @@ class Auth {
 
   login(userData) {
     return new Promise((resolve, reject) => {
-      API.post('/user/login', userData)
+      API.post('/user/login', userData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
         .then((response) => {
           resolve(response);
         })
         .catch((error) => {
+          console.log(error);
           reject(error);
         });
     });
