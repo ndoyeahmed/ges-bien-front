@@ -15,7 +15,7 @@ import '../../assets/css/main.css';
 
 class LoginPage extends React.Component {
     state = {
-        login: '',
+        username: '',
         password: '',
         redirectToRefferer: false,
         error: ''
@@ -28,7 +28,7 @@ class LoginPage extends React.Component {
   }
 
     login = () => {
-        if (this.state.login && this.state.password) {
+        if (this.state.username && this.state.password) {
             auth.login(this.state).then((result) => {
                 let responseJSON = result;
                 console.log(responseJSON);
@@ -78,7 +78,7 @@ class LoginPage extends React.Component {
                            <div className="login100-form validate-form p-b-33 p-t-5">
                                <h4 className="text-danger text-center text-bold">{this.state.error}</h4>
                                <div className="wrap-input100 validate-input" data-validate="Enter username">
-                                   <input className="input100" type="text" name="login" placeholder="User name" onChange={this.onChange}/>
+                                   <input className="input100" type="text" name="username" placeholder="User name" onChange={this.onChange}/>
                                        <span className="focus-input100" data-placeholder="&#xe82a;"> </span>
                                </div>
 

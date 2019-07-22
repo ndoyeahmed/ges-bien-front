@@ -14,6 +14,11 @@ export default {
       url: '/user',
       icon: 'icon-user'
     },
+    {
+      name: 'Bien',
+      url: '/bien',
+      icon: 'icon-list'
+    }
 
   ],
 };

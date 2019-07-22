@@ -33,7 +33,7 @@ export default class UtilisateurAddPage extends React.Component {
    componentDidMount() {
     userService.listProfil().then((result) => {
       this.setState({listProfil: result.data});
-    })
+    });
   }
 
   getNom(event) { this.setState({nom: event.target.value}); }
