@@ -15,6 +15,8 @@ import Form from "reactstrap/es/Form";
 import FormGroup from "reactstrap/es/FormGroup";
 import Label from "reactstrap/es/Label";
 import Input from "reactstrap/es/Input";
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css'
 
 export default class UtilisateurPage extends React.Component {
 
@@ -88,11 +90,11 @@ export default class UtilisateurPage extends React.Component {
       userService.addUser(user).then(result => {
         if (result.data.success) {
           console.log(result.data.success);
-          console.log('notification a mettre');
+          toastr.success('Opération effectuée avec success');
           this.clear();
           this.setState({listUser: result.data.success})
         } else {
-          console.log('erreur lors de l\'ajout');
+          console.log('Echec de l\'opération');
         }
       });
     } else {
@@ -135,7 +137,7 @@ export default class UtilisateurPage extends React.Component {
 
           </CardFooter>
         </Card>
-        <Modal className="modal-lg" isOpen={this.state.modal}>
+        <Modal className="modal-lg" isOpen={this.state.modal} fade toggle={this.toggle}>
           <ModalHeader toggle={this.toggle} className="text-center">Ajouter utilisateur</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.addUser}>

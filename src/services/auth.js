@@ -3,10 +3,13 @@ import API from './api';
 class Auth {
 
   login(userData) {
+    const bodyFormData = new FormData();
+    bodyFormData.append('username', userData.username);
+    bodyFormData.append('password', userData.password);
     return new Promise((resolve, reject) => {
-      API.post('/user/login', userData, {
+      API.post('/users/login', bodyFormData, {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
           'Accept': 'application/json'
         }
       })

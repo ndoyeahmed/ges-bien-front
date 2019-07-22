@@ -37,8 +37,10 @@
     "react-router-guard": "^2.0.2",
     "react-table": "^6.10.0",
     "react-test-renderer": "^16.8.6",
+    "reactjs-toastr": "^1.1.0",
     "reactstrap": "^8.0.0",
-    "simple-line-icons": "^2.4.1"
+    "simple-line-icons": "^2.4.1",
+    "toastr": "^2.1.4"
   },
   "devDependencies": {
     "react-scripts": "^3.0.1"
