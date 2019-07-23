@@ -4,7 +4,7 @@ class UtilisateurService {
 
   addUser(user) {
     return new Promise((resolve, reject) => {
-      API.post('user/add-user', user)
+      API.post('users', user)
         .then((response) => {
           resolve(response);
         }).catch((error) => {
@@ -27,7 +27,7 @@ class UtilisateurService {
 
   listUser() {
     return new Promise((resolve, reject) => {
-      API.get('user/all-activated-user')
+      API.get('users')
         .then((response) => {
           resolve(response);
         })

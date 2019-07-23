@@ -79,7 +79,7 @@ export default class UtilisateurListPage extends React.Component {
               <th>Prénom</th>
               <th>Téléphone</th>
               <th>Email</th>
-              <th>Adresse</th>
+              <th>Profile</th>
               <th className="text-center">Action</th>
             </tr>
             </thead>
@@ -89,11 +89,11 @@ export default class UtilisateurListPage extends React.Component {
                 <tr key={user.id}>
                   <td>{this.props.listUser.indexOf(user) + 1}</td>
                   <td>{user.date}</td>
-                  <td>{user.lastName}</td>
-                  <td>{user.firstName}</td>
+                  <td>{user.nom}</td>
+                  <td>{user.prenom}</td>
                   <td>{user.phoneNumber}</td>
                   <td>{user.email}</td>
-                  <td>{user.adresse}</td>
+                  <td>{user.profil.libelle}</td>
                   <td>
                     <Row>
                       <Col md="6">

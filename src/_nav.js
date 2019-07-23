@@ -18,6 +18,11 @@ export default {
       name: 'Bien',
       url: '/bien',
       icon: 'icon-list'
+    },
+    {
+      name: 'Bailleur',
+      url: '/bailleur',
+      icon: 'icon-list'
     }
 
   ],

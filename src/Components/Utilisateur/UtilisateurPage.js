@@ -54,7 +54,7 @@ export default class UtilisateurPage extends React.Component {
         this.setState({listProfil: x.data});
       });
       this.setState({
-        listUser: result.data,
+        listUser: result.data.data,
         ok: true
       });
     });
@@ -78,11 +78,10 @@ export default class UtilisateurPage extends React.Component {
     if (this.state.nom && this.state.prenom && this.state.email && this.state.telephone && this.state.adresse) {
       console.log('enregistrer');
       const user = {
-        firstName: this.state.nom,
-        lastName: this.state.prenom,
+        nom: this.state.nom,
+        prenom: this.state.prenom,
         email: this.state.email,
         phoneNumber: this.state.telephone,
-        adresse: this.state.adresse,
         profil: {
           id: this.state.profil
         }
