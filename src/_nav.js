@@ -23,6 +23,16 @@ export default {
       name: 'Bailleur',
       url: '/bailleur',
       icon: 'icon-list'
+    },
+    {
+      name: 'Client',
+      url: '/client',
+      icon: 'icon-list'
+    },
+    {
+      name: 'Location',
+      url: '/location',
+      icon: 'icon-list'
     }
 
   ],

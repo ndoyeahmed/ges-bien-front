@@ -1,5 +1,5 @@
 import React from 'react';
-import bienService from "../../services/bienService";
+import toastr from "toastr";
 import Card from "reactstrap/es/Card";
 import CardHeader from "reactstrap/es/CardHeader";
 import Row from "reactstrap/es/Row";
@@ -7,55 +7,49 @@ import Col from "reactstrap/es/Col";
 import {Button} from "reactstrap";
 import CardBody from "reactstrap/es/CardBody";
 import CardFooter from "reactstrap/es/CardFooter";
-import BailleurListComponent from "./BailleurListComponent";
+import Modal from "reactstrap/es/Modal";
 import ModalHeader from "reactstrap/es/ModalHeader";
 import ModalBody from "reactstrap/es/ModalBody";
 import Form from "reactstrap/es/Form";
 import FormGroup from "reactstrap/es/FormGroup";
-import Modal from "reactstrap/es/Modal";
 import Label from "reactstrap/es/Label";
 import Input from "reactstrap/es/Input";
-import toastr from "toastr";
+import bienService from "../../services/bienService";
+import ClientListComponent from "./ClientListComponent";
 
-export default class BailleurComponent extends React.Component {
+export default class ClientComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bailleurNom: '',
-      numeroPiece: '',
-      email: '',
-      telephone: '',
-      adresse: '',
-      bailleurCategorie: '',
-      error: '',
       modal: false,
       ok: false,
-      listBailleur: [],
+      listClients: [],
+      nom: '',
+      CIN: '',
+      prenom: '',
+      email: '',
+      telephone: '',
+      error: '',
     };
+
     this.toggle = this.toggle.bind(this);
-    this.getBailleurNom = this.getBailleurNom.bind(this);
-    this.getNumeroPiece = this.getNumeroPiece.bind(this);
-    this.getTelephone = this.getTelephone.bind(this);
+    this.getCIN = this.getCIN.bind(this);
+    this.getNom = this.getNom.bind(this);
+    this.getPrenom = this.getPrenom.bind(this);
     this.getEmail = this.getEmail.bind(this);
-    this.getAdresse = this.getAdresse.bind(this);
-    this.addBailleur = this.addBailleur.bind(this);
+    this.getTelephone = this.getTelephone.bind(this);
+    this.addClient = this.addClient.bind(this);
   }
 
   componentDidMount() {
-    bienService.listBailleur().then((result) => {
+    bienService.listClient().then((result) => {
       console.log(result);
       this.setState({
-        listBailleur: result.data.data,
+        listClients: result.data.data,
         ok: true
       });
     });
   }
-
-  getBailleurNom(event) { this.setState({ bailleurNom: event.target.value }); }
-  getNumeroPiece(event) { this.setState({ numeroPiece: event.target.value }); }
-  getTelephone(event) { this.setState({ telephone: event.target.value }); }
-  getEmail(event) { this.setState({ email: event.target.value }); }
-  getAdresse(event) { this.setState({ adresse: event.target.value }); }
 
   toggle() {
     this.setState({
@@ -63,22 +57,29 @@ export default class BailleurComponent extends React.Component {
     });
   }
 
-  addBailleur(event) {
+  getCIN(event) { this.setState({CIN: event.target.value}); }
+  getNom(event) { this.setState({nom: event.target.value}); }
+  getPrenom(event) { this.setState({prenom: event.target.value}); }
+  getEmail(event) { this.setState({email: event.target.value}); }
+  getTelephone(event) { this.setState({telephone: event.target.value}); }
+
+  addClient(event) {
     event.preventDefault();
-    if (this.state.bailleurNom && this.state.numeroPiece && this.state.telephone && this.state.email && this.state.adresse) {
+    if (this.state.nom && this.state.prenom && this.state.email && this.state.telephone && this.state.CIN) {
       console.log('enregistrer');
-      const bailleur = {
-        bailleurNom: this.state.bailleurNom,
-        numeroPiece: this.state.numeroPiece,
-        telephone: this.state.telephone,
+      const client = {
+        CIN: this.state.CIN,
+        nom: this.state.nom,
+        prenom: this.state.prenom,
         email: this.state.email,
-        adresse: this.state.adresse,
+        phoneNumber: this.state.telephone,
       };
-      bienService.addBailleur(bailleur).then(result => {
-        if (result.data) {
+      bienService.addClient(client).then(result => {
+        if (result.data.data) {
           console.log(result);
+          this.clear();
           toastr.success('Opération effectuée avec success');
-          this.setState({listBailleur: result.data.data})
+          this.setState({listClients: result.data.data})
         } else {
           toastr.error('Echec de l\'opération');
         }
@@ -89,48 +90,64 @@ export default class BailleurComponent extends React.Component {
     }
   }
 
+  clear() {
+    this.setState({
+      CIN: '',
+      nom: '',
+      prenom: '',
+      email: '',
+      telephone: '',
+    })
+  }
+
   render() {
     return (
       <div>
         <Card>
           <CardHeader className="alert-success">
             <h1>
-              Gestion des Bailleurs
+              Gestion des Clients
             </h1>
           </CardHeader>
         </Card>
         <Card>
           <CardHeader className="alert-dark">
             <Row>
-              <Col md="1" className="pull-left"><Button color="primary" onClick={this.toggle}
-                                                        className="mr-1">Ajouter</Button></Col>
-              <Col md="11" className="text-center"><h3>Liste Bailleur</h3></Col>
+              <Col md="1" className="pull-left"><Button color="primary" onClick={this.toggle} className="mr-1">Ajouter</Button></Col>
+              <Col md="11" className="text-center"><h3>Liste Clients</h3></Col>
             </Row>
           </CardHeader>
           <CardBody>
-            <BailleurListComponent listBailleur={this.state.listBailleur} ok={this.state.ok}/>
+            <ClientListComponent listClients={this.state.listClients} ok={this.state.ok}/>
           </CardBody>
           <CardFooter>
 
           </CardFooter>
         </Card>
-
         <Modal className="modal-lg" isOpen={this.state.modal} fade toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle} className="text-center">Ajouter un bailleur</ModalHeader>
+          <ModalHeader toggle={this.toggle} className="text-center">Ajouter Client</ModalHeader>
           <ModalBody>
-            <Form onSubmit={this.addUser}>
+            <Form>
               <Row><Col md="12"><h5 className="text-danger text-bold"><i className={this.state.error !== '' ? 'fa fa-warning' : ''}>{this.state.error}</i></h5></Col></Row>
+              <Row>
+                <Col md="12">
+                  <FormGroup>
+                    <Label>CIN :</Label>
+                    <Input type="text" value={this.state.CIN} onChange={this.getCIN} required/>
+                  </FormGroup>
+                </Col>
+              </Row>
               <Row>
                 <Col md="6">
                   <FormGroup>
-                    <Label>Nom bailleur :</Label>
-                    <Input type="text" value={this.state.bailleurNom} onChange={this.getBailleurNom}/>
+                    <Label>Nom :</Label>
+                    <Input type="text" value={this.state.nom} onChange={this.getNom} required/>
                   </FormGroup>
                 </Col>
                 <Col md="6">
                   <FormGroup>
-                    <Label>Numéro de piece :</Label>
-                    <Input type="text" value={this.state.numeroPiece} onChange={this.getNumeroPiece}/>
+                    <Label>Prénom :</Label>
+                    <Input type="text" value={this.state.prenom} onChange={this.getPrenom}/>
                   </FormGroup>
                 </Col>
               </Row>
@@ -143,7 +160,7 @@ export default class BailleurComponent extends React.Component {
                 </Col>
                 <Col md="6">
                   <FormGroup>
-                    <Label>E-mail :</Label>
+                    <Label>Email :</Label>
                     <Input type="text" value={this.state.email} onChange={this.getEmail}/>
                   </FormGroup>
                 </Col>
@@ -151,15 +168,7 @@ export default class BailleurComponent extends React.Component {
               <Row>
                 <Col md="12">
                   <FormGroup>
-                    <Label>Adresse :</Label>
-                    <Input type="textarea" value={this.state.adresse} onChange={this.getAdresse}/>
-                  </FormGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col md="12">
-                  <FormGroup>
-                    <button type="submit" className="btn btn-primary" onClick={this.addBailleur}>Enregistrer</button>
+                    <button type="submit" className="btn btn-primary" onClick={this.addClient}>Enregistrer</button>
                   </FormGroup>
                 </Col>
               </Row>
@@ -167,6 +176,6 @@ export default class BailleurComponent extends React.Component {
           </ModalBody>
         </Modal>
       </div>
-    )
+    );
   }
 }

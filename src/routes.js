@@ -66,6 +66,16 @@ const routes = [
     path: '/bailleur',
     name: 'Bailleur',
     component: dynamicWrapper(() => import ('./Components/Bailleur/BailleurComponent'))
+  },
+  {
+    path: '/client',
+    name: 'Client',
+    component: dynamicWrapper(() => import ('./Components/Client/ClientComponent'))
+  },
+  {
+    path: '/location',
+    name: 'Location',
+    component: dynamicWrapper(() => import ('./Components/Location/LocationComponent'))
   }
 
 ];

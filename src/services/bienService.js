@@ -25,6 +25,18 @@ class BienService {
     })
   }
 
+  listBienByTypeBien(id) {
+    return new Promise((resolve, reject) => {
+      API.get('biens/all-bien-by-type/'+id)
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        })
+    })
+  }
+
   listBailleur() {
     return new Promise((resolve, reject) => {
       API.get('biens/bailleurs')
@@ -37,16 +49,15 @@ class BienService {
     })
   }
 
-  listBailleurs() {
+  addBailleur(bailleur) {
     return new Promise((resolve, reject) => {
-      API.get('bailleurs')
+      API.post('biens/bailleurs', bailleur)
         .then((response) => {
           resolve(response);
-        })
-        .catch((error) => {
-          reject(error);
-        })
-    })
+        }).catch((error) => {
+        reject(error);
+      });
+    });
   }
 
   addBien(bien) {
@@ -65,6 +76,29 @@ class BienService {
             'Accept': 'application/json'
           }
         })
+        .then((response) => {
+          resolve(response);
+        }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
+  listClient() {
+    return new Promise((resolve, reject) => {
+      API.get('clients')
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        })
+    })
+  }
+
+  addClient(client) {
+    return new Promise((resolve, reject) => {
+      API.post('clients', client)
         .then((response) => {
           resolve(response);
         }).catch((error) => {

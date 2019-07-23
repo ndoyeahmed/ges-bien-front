@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'http://localhost:8080/immo/api/'
+  baseURL: 'https://backend-immo.herokuapp.com/api/'
 });
 
 // this.BaseUrlprod = 'https://sene-bien-immo-api.herokuapp.com/rest/';
