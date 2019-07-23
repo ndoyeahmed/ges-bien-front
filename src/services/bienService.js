@@ -37,6 +37,18 @@ class BienService {
     })
   }
 
+  listBailleurs() {
+    return new Promise((resolve, reject) => {
+      API.get('bailleurs')
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        })
+    })
+  }
+
   addBien(bien) {
     const body = new FormData();
     body.append('description', bien.description);

@@ -61,6 +61,11 @@ const routes = [
     path: '/bien',
     name: 'Bien',
     component: dynamicWrapper(() => import ('./Components/Biens/BienComponent'))
+  },
+  {
+    path: '/bailleur',
+    name: 'Bailleur',
+    component: dynamicWrapper(() => import ('./Components/Bailleur/BailleurComponent'))
   }
 
 ];
